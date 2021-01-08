@@ -1,0 +1,10 @@
+{
+    "activeDBConfig": {
+        "connectionString": "mongodb+srv://admin:admin@cluster0.lfmcs.mongodb.net/active?retryWrites=true&w=majority",
+        "dbList": ["first"]
+    },
+    "backupDBConfig": {
+        "connectionString": "mongodb+srv://admin:admin@cluster0.a04eb.mongodb.net/backup?retryWrites=true&w=majority",
+        "dbList": ["first"]
+    }
+}

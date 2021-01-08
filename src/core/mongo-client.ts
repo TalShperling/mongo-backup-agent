@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
 
 export const initiateMongoClient = async (mongoConnectionString: string) => {
-    return MongoClient.connect(mongoConnectionString);
+    return MongoClient.connect(mongoConnectionString, { useUnifiedTopology: true });
 }
