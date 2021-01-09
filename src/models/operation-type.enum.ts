@@ -1,4 +1,7 @@
 /* eslint-disable no-unused-vars */
+/**
+ * Mongodb change-stream operation types.
+ */
 export enum OPERATION_TYPE {
     REPLACE = 'replace',
     INSERT = 'insert',

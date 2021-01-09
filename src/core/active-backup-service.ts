@@ -1,10 +1,14 @@
-import { ChangeEvent, ChangeEventCR, ChangeEventDelete, ChangeEventOther, ChangeEventUpdate, ChangeStream, Db, MongoError } from 'mongodb';
+import { ChangeEvent, ChangeEventCR, ChangeEventDelete, ChangeEventOther, ChangeEventUpdate, ChangeStream, Db } from 'mongodb';
 import { Maybe } from '../models/maybe';
 import { OPERATION_TYPE } from '../models/operation-type.enum';
 import { logDisruptionsOnEventEmitter } from '../utils/logger/common-logs/event-emitter';
 import { logDebug, logInfo } from '../utils/logger/logger';
 import { transformUnsetFromArray } from '../utils/unset.utils';
 
+/**
+ * Initiates a function map that gets a change stream operation type
+ *  and returns a function that applies this change on the backup DB.
+ */
 const initializeChangeMap = (): Map<OPERATION_TYPE, (db: Db, event: any) => {}> => {
   // TODO: Fix any type on event
   const changeMap: Map<OPERATION_TYPE, (db: Db, event: any) => {}> = new Map();
@@ -44,7 +48,11 @@ const initializeChangeMap = (): Map<OPERATION_TYPE, (db: Db, event: any) => {}> 
 
   return changeMap;
 }
-
+/**
+ * The function that creates the change stream and applies the changes to the backup db.
+ * @param activeDB - the active db to copy from.
+ * @param backupDB - the backup db to copy to.
+ */
 export const startActiveBackupSync = (activeDB: Db, backupDB: Db): void => {
   logInfo(`Starting synchronization for ${activeDB.databaseName} db`);
   const activeChangeStream: ChangeStream = activeDB.watch();
