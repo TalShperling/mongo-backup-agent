@@ -1,2 +1,19 @@
-node_modules/
-.vscode/
+
+/node_modules
+/dist
+
+# misc
+/coverage
+npm-debug.log
+debug.log
+
+# Code Editor
+.idea
+.vscode
+
+# Generated
+src/interfaces
+
+# Config
+conf/env.json
+.env
