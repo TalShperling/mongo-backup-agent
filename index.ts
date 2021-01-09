@@ -1,20 +1,20 @@
 import config from 'config';
 import { startActiveBackupSync } from './src/core/active-backup-service';
 import { initiateMongoClient } from './src/core/mongo-client';
-import { DBConfig } from './src/models/db/db-config';
+import { DBConfig } from './src/models/db-config';
+import { MongoClientRole } from './src/models/mongo-client-role';
+import { logError, logInfo } from './src/utils/logger/logger';
 
 (async () => {
   try {
-    console.log('Starting mongo-backup server');
-    const activeClient = await initiateMongoClient(config.get<DBConfig>('activeDBConfig').connectionString);
-    console.log('Active mongo-client initialized');
-    const backupClient = await initiateMongoClient(config.get<DBConfig>('backupDBConfig').connectionString);
-    console.log('Backup mongo-client initialized');
+    logInfo('Starting mongo-backup server');
+    const activeClient = await initiateMongoClient(config.get<DBConfig>('activeDBConfig').connectionString, MongoClientRole.ACTIVE);
+    const backupClient = await initiateMongoClient(config.get<DBConfig>('backupDBConfig').connectionString, MongoClientRole.BACKUP);
 
     config.get<DBConfig>('activeDBConfig').dbList.forEach(db => {
       startActiveBackupSync(activeClient.db(db), backupClient.db(db));
     })
   } catch (err) {
-    console.error(err);
+    logError(err);
   }
-})()
+})();
