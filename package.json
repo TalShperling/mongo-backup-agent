@@ -28,7 +28,7 @@
     "@types/config": "0.0.39",
     "@types/mongodb": "3.6.20",
     "@typescript-eslint/eslint-plugin": "4.28.3",
-    "@typescript-eslint/parser": "4.28.3",
+    "@typescript-eslint/parser": "4.28.4",
     "eslint": "7.31.0",
     "eslint-config-standard": "16.0.3",
     "eslint-plugin-import": "2.23.4",
