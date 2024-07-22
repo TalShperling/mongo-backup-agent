@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/TalShperling/mongo-backup-agent#readme",
   "devDependencies": {
-    "@types/config": "0.0.41",
+    "@types/config": "3.3.4",
     "@types/mongodb": "3.6.20",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
